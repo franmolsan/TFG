@@ -26,24 +26,45 @@ app.listen(port, () => {
 app.get('/', (req, res) => res.send('Hello World!'));
 
 
+app.get("/get-button-clicks/:id", (request, response) => {
 
-app.get('/products', (req,res) => {
-    const products = [
-        {
-            id:1,
-            name: "hammer",
-        },
-        {
-            id:2,
-            name: "screwdriver",
-        },
-        {
-            id:3,
-            name:"wrench",
-        },
-    ];
-    res.json(products)
-})
+    var buttonID = request.params.id;
+    console.log(buttonID)
+    
+    collectionButtonClicks.findOne({"buttonID": buttonID}, (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        if (result == null) {
+            response.send("Ese botón no ha sido encontrado");
+        }
+        else {
+            response.send(result);
+        }
+    });
+
+});
+
+app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
+
+    var buttonID = request.params.id;
+    var clickType = request.params.clickType;
+    console.log(buttonID + " " + clickType)
+
+    collectionButtonClicks.findOne({"buttonID": buttonID},{projection: {[clickType]:1, _id:0}} , (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        if (result == null) {
+            response.send("Ese botón no ha sido encontrado");
+        }
+        else {
+            //console.log(result[clickType])
+            response.send(result);
+        }
+    });
+
+});
 
 app.post("/button-click", (request, response) => {
 
