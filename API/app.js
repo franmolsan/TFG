@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors')
+
 // const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const CONNECTION_URL = process.env.MONGO_CONNECTION_URL;
@@ -11,6 +13,13 @@ const port = 3000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) 
+app.use(cors())
+
+var corsOptions = {
+    origin: 'https://creator.voiceflow.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 
 app.listen(port, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
@@ -26,7 +35,7 @@ app.listen(port, () => {
 app.get('/', (req, res) => res.send('Hello World!'));
 
 
-app.get("/get-button-clicks/:id", (request, response) => {
+app.get("/get-button-clicks/:id", cors(corsOptions), (request, response) => {
 
     var buttonID = request.params.id;
     console.log(buttonID)
@@ -45,7 +54,7 @@ app.get("/get-button-clicks/:id", (request, response) => {
 
 });
 
-app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
+app.get("/get-button-clicks/:id/type/:clickType", cors(corsOptions), (request, response) => {
 
     var buttonID = request.params.id;
     var clickType = request.params.clickType;
