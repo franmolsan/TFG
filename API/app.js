@@ -28,6 +28,7 @@ app.listen(port, () => {
         }
         database = client.db(DATABASE_NAME);
         collectionButtonClicks = database.collection("button_clicks");
+        collectionQR = database.collection("qr");
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
 });
@@ -90,6 +91,26 @@ app.post("/button-click", (request, response) => {
         }
         else {
             response.send("Incremento correcto");
+        }
+    });
+
+});
+
+app.post("/qr-read", (request, response) => {
+
+    var qrID = request.body.qrID;
+
+    console.log("lectura qr " + qrID)
+    
+    collectionQR.updateOne({ "qrID":request.body.qrID }, {"$inc": { "TimesRead" : 1} }, (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        if (result == null) {
+            response.send("No se pudo incrementar correctamente");
+        }
+        else {
+            response.send(result);
         }
     });
 
