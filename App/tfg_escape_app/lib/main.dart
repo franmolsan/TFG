@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
     }
 
   Future<void> _makePostRequest(String qrID) async {
-    var url = Uri.parse('http://192.168.1.127:3000/qr-read');
+    var url = Uri.parse('http://192.168.100.8:3000/qr-read');
     var response = await http.post(url, body: {'qrID': qrID});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');

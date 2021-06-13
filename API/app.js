@@ -102,7 +102,7 @@ app.post("/qr-read", (request, response) => {
 
     console.log("lectura qr " + qrID)
     
-    collectionQR.updateOne({ "qrID":request.body.qrID }, {"$inc": { "TimesRead" : 1} }, (error, result) => {
+    collectionQR.updateOne({ "qrID":request.body.qrID }, { $inc: { "timesRead": 1 } }, (error, result) => {
         if (error) {
             return response.status(500).send(error);
         }
@@ -110,7 +110,7 @@ app.post("/qr-read", (request, response) => {
             response.send("No se pudo incrementar correctamente");
         }
         else {
-            response.send(result);
+            response.send("Incremento correcto");
         }
     });
 
