@@ -32,20 +32,6 @@ app.get("/get-button-clicks/:id", (request, response) => {
     const buttonID = request.params.id;
     console.log(buttonID)
     
-    /*
-    collectionButtonClicks.findOne({"buttonID": buttonID}, (error, result) => {
-        if (error) {
-            return response.status(500).send(error);
-        }
-        if (result == null) {
-            response.send("Ese botón no ha sido encontrado");
-        }
-        else {
-            response.send(result);
-        }
-    });
-    */
-
     var params = {
         TableName : db,
         Key: {
@@ -64,45 +50,59 @@ app.get("/get-button-clicks/:id", (request, response) => {
 
 });
 
-/*
+
 app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
 
     var buttonID = request.params.id;
     var clickType = request.params.clickType;
     console.log(buttonID + " " + clickType)
 
-    collectionButtonClicks.findOne({"buttonID": buttonID},{projection: {[clickType]:1, _id:0}} , (error, result) => {
+    var params = {
+        TableName : db,
+        Key: {
+            buttonID: buttonID
+        }
+    };
+
+    dynamoDb.get(params, (error, result) => {
         if (error) {
-            return response.status(500).send(error);
+           console.log(error);
+           response.status(500).json({ error: error });
+        } else {
+            response.status(200).send({ item: result.$(clickType) });
         }
-        if (result == null) {
-            response.send("Ese botón no ha sido encontrado");
-        }
-        else {
-            //console.log(result[clickType])
-            response.send(result);
-        }
-    });
+     });
 
 });
 
 app.post("/button-click", (request, response) => {
 
     var clickType = request.body.clickType;
+    var buttonID = request.body.buttonID
 
     console.log(clickType)
-    
-    collectionButtonClicks.updateOne({ "serialNumber":request.body.serialNumber }, {"$inc": { [clickType] : 1} }, (error, result) => {
+
+    var params = {
+        TableName : db,
+        Key: {
+            buttonID: buttonID,
+        },
+        UpdateExpression: "set :clickType = :clickType + :val",
+        ExpressionAttributeValues:{
+            ":val": 1,
+            ":clickType": clickType
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    dynamoDb.update(params, (error, result) => {
         if (error) {
-            return response.status(500).send(error);
+           console.log(error);
+           response.status(500).json({ error: error });
+        } else {
+            response.status(200).send("Incremento Correcto");
         }
-        if (result == null) {
-            response.send("No se pudo incrementar correctamente");
-        }
-        else {
-            response.send("Incremento correcto");
-        }
-    });
+     });
 
 });
 
@@ -125,5 +125,5 @@ app.post("/qr-read", (request, response) => {
     });
 
 });
-*/
+
 module.exports.handler = serverless(app);
