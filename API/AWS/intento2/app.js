@@ -2,7 +2,8 @@ const serverless = require('serverless-http');
 const express = require('express');
 const bodyParser = require('body-parser');
 var AWS = require('aws-sdk');
-const db =  "buttons";
+const dbButtons =  "buttons";
+const dbQR =  "qrTabla";
 
 
 AWS.config.update({
@@ -18,6 +19,8 @@ const port = 3000;
 const app = express();
 
 app.use(express.json({ strict: false }));
+app.use(bodyParser.json({ limit: '1024mb', extended: true }));
+app.use(bodyParser.urlencoded({limit:'1024mb', extended: true }));
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
@@ -30,10 +33,9 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get("/get-button-clicks/:id", (request, response) => {
 
     const buttonID = request.params.id;
-    console.log(buttonID)
     
     var params = {
-        TableName : db,
+        TableName : dbButtons,
         Key: {
             buttonID: buttonID
         }
@@ -55,13 +57,13 @@ app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
 
     var buttonID = request.params.id;
     var clickType = request.params.clickType;
-    console.log(buttonID + " " + clickType)
 
     var params = {
-        TableName : db,
+        TableName : dbButtons,
         Key: {
             buttonID: buttonID
-        }
+        },
+        AttributesToGet: [clickType]
     };
 
     dynamoDb.get(params, (error, result) => {
@@ -69,7 +71,7 @@ app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
            console.log(error);
            response.status(500).json({ error: error });
         } else {
-            response.status(200).send({ item: result.$(clickType) });
+            response.status(200).send({ item: result.Item });
         }
      });
 
@@ -80,17 +82,17 @@ app.post("/button-click", (request, response) => {
     var clickType = request.body.clickType;
     var buttonID = request.body.buttonID
 
-    console.log(clickType)
-
     var params = {
-        TableName : db,
+        TableName : dbButtons,
         Key: {
             buttonID: buttonID,
         },
-        UpdateExpression: "set :clickType = :clickType + :val",
+        UpdateExpression: "set #clickType = #clickType + :val",
+        ExpressionAttributeNames: {
+            "#clickType": clickType
+        },
         ExpressionAttributeValues:{
-            ":val": 1,
-            ":clickType": clickType
+            ":val": 1
         },
         ReturnValues:"UPDATED_NEW"
     };
@@ -109,21 +111,51 @@ app.post("/button-click", (request, response) => {
 app.post("/qr-read", (request, response) => {
 
     var qrID = request.body.qrID;
-
-    console.log("lectura qr " + qrID)
     
-    collectionQR.updateOne({ "qrID":request.body.qrID }, { $inc: { "timesRead": 1 } }, (error, result) => {
+    var params = {
+        TableName : dbQR,
+        Key: {
+            qrID: qrID,
+        },
+        UpdateExpression: "set TimesRead = TimesRead + :val",
+        ExpressionAttributeValues:{
+            ":val": 1
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    dynamoDb.update(params, (error, result) => {
         if (error) {
-            return response.status(500).send(error);
+           console.log(error);
+           response.status(500).send(request.body);
+        } else {
+            response.status(200).send("Incremento Correcto");
         }
-        if (result == null) {
-            response.send("No se pudo incrementar correctamente");
-        }
-        else {
-            response.send("Incremento correcto");
-        }
-    });
+     });
 
 });
+
+app.get("/get-qr-read/:id", (request, response) => {
+
+    var qrID = request.params.id;
+    
+    var params = {
+        TableName : dbQR,
+        Key: {
+            qrID: qrID,
+        }
+    };
+
+    dynamoDb.get(params, (error, result) => {
+        if (error) {
+           console.log(error);
+           response.status(500).json({ error: error });
+        } else {
+            response.status(200).send({ item: result.Item });
+        }
+     });
+
+  
+  });
 
 module.exports.handler = serverless(app);

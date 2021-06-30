@@ -145,7 +145,7 @@
                     "dynamodb:UpdateItem",
                     "dynamodb:DeleteItem"
                   ],
-                  "Resource": "arn:aws:dynamodb:eu-west-1:341252513911:table/buttons"
+                  "Resource": "*"
                 }
               ]
             }
@@ -174,7 +174,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-escape/dev/1624967015755-2021-06-29T11:43:35.755Z/api-escape.zip"
+          "S3Key": "serverless/api-escape/dev/1625048354763-2021-06-30T10:19:14.763Z/api-escape.zip"
         },
         "Handler": "app.handler",
         "Runtime": "nodejs12.x",
@@ -192,14 +192,14 @@
         "AppLogGroup"
       ]
     },
-    "AppLambdaVersionjryawFPBboUs7GCRmrAzZK3PX6WROQMQe18meT00c": {
+    "AppLambdaVersion4RE3wuiSqnFScn0ujHVdx8s8mRoLqcZMEPCW9wTZzo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "v4SztJzvAa+8VcWMiNDBRAJdwlKje6Eeljp+YdJ6Riw="
+        "CodeSha256": "wEVW04yNEZwxVneEAZDCJeTvEySVTCiQUVBGfaMF5es="
       }
     },
     "ApiGatewayRestApi": {
@@ -324,7 +324,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1624967011943": {
+    "ApiGatewayDeployment1625048350977": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -387,7 +387,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionjryawFPBboUs7GCRmrAzZK3PX6WROQMQe18meT00c"
+        "Ref": "AppLambdaVersion4RE3wuiSqnFScn0ujHVdx8s8mRoLqcZMEPCW9wTZzo"
       },
       "Export": {
         "Name": "sls-api-escape-dev-AppLambdaFunctionQualifiedArn"
