@@ -1,0 +1,46 @@
+﻿service: api-escape
+      
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "*"
+
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+# The environment block tells Serverless to make these variables 
+# avaliable as proces.env in our Lambda functions.
+environment:
+  # Assign our table name to an environment variable.
+  BUTTONS_DYNAMODB_TABLE: "buttons"
+
+
+
+#  resources:
+#    Resoruces:
+#      ButtonsDynamoDBTable:
+#        Type: 'AWS::DynamoDB::Table'
+#         # Prevents us accidentally deleting our serverless DynamobDB tables
+#         DeletionPolicy: Retain
+#         Properties:
+#           TableName: ${self:provider.environment.BUTTONS_DYNAMODB_TABLE}
+#           AttributeDefinitions:
+#           - AtributteName: e
+
+
