@@ -96,16 +96,25 @@ app.get("/get-button-clicks/:id/type/:clickType", (request, response) => {
 
 });
 
+
+// POST Request to register button clicks
 app.post("/button-click", (request, response) => {
 
+    // get which button has been clicked
+    // and the click type (long, short, double)
     var clickType = request.body.clickType;
     var buttonID = request.body.buttonID
 
+    // DB update params
     var params = {
+
+        // query the button by its ID
         TableName : dbButtons,
         Key: {
             buttonID: buttonID,
         },
+
+        // increment click counter
         UpdateExpression: "set #clickType = #clickType + :val",
         ExpressionAttributeNames: {
             "#clickType": clickType
@@ -116,11 +125,15 @@ app.post("/button-click", (request, response) => {
         ReturnValues:"UPDATED_NEW"
     };
 
+    // use the DynamoDB object provided by the AWS SDK
     dynamoDb.update(params, (error, result) => {
+
+        // if there has been an error, log it
         if (error) {
            console.log(error);
            response.status(500).json({ error: error });
         } else {
+            // if everything worked, send succesful message
             response.status(200).send("Button succesfully clicked");
         }
      });
@@ -223,18 +236,26 @@ app.post("/save-gamestate", (request, response) => {
     const GameID = request.body.GameID;
     const inventory = request.body.inventory;
     const blockedRooms = request.body.blockedRooms;
+    const visitedRooms = request.body.visitedRooms;
     const currentRoom = request.body.currentRoom;
+    const poweredRooms = request.body.poweredRooms;
+    const unlockedElements = request.body.unlockedElements;
     
+    console.log(JSON.stringify(request.body))
+
     var params = {
         TableName : dbGameStates,
         Key: {
             GameID: GameID,
         },
-        UpdateExpression: "set inventory = :i,  blockedRooms = :b, currentRoom = :c",
+        UpdateExpression: "set inventory = :i,  blockedRooms = :b, currentRoom = :c, visitedRooms = :v, poweredRooms = :p, unlockedElements = :u ",
         ExpressionAttributeValues:{
             ":i": inventory,
             ":b": blockedRooms,
-            ":c": currentRoom
+            ":c": currentRoom,
+            ":v": visitedRooms,
+            ":p": poweredRooms,
+            ":u": unlockedElements
         },
         ReturnValues:"UPDATED_NEW"
     };
@@ -242,9 +263,9 @@ app.post("/save-gamestate", (request, response) => {
     dynamoDb.update(params, (error, result) => {
         if (error) {
            console.log(error);
-           response.status(500).send(request.body);
+           response.status(500).send(error);
         } else {
-            response.status(200).send("Game state succesfully updated");
+            response.status(200).send(result.Attributes);
         }
      });
 
