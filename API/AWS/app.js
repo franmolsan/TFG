@@ -192,14 +192,15 @@ app.get("/get-qr-read/:id", (request, response) => {
 
 
 app.get("/get-game-rooms", (request, response) => {
-
+    request.setEncoding('utf8');
+    console.log("getting game rooms");
     const params = {
         TableName: dbRooms
     };
 
     dynamoDb.scan(params, function (err, data) {
         if (err) {
-          console.log("Error", err);
+          console.log("get game rooms Error" + err);
           response.status(500).json({ error: err });
         } else {
           console.log("Success", data);
@@ -210,7 +211,8 @@ app.get("/get-game-rooms", (request, response) => {
 
 
 app.get("/get-gamestate/:id", (request, response) => {
-
+    request.setEncoding('utf8');
+    console.log("getting gamestate");
     const GameID = request.params.id;
     
     var params = {
@@ -222,7 +224,7 @@ app.get("/get-gamestate/:id", (request, response) => {
 
     dynamoDb.get(params, (error, result) => {
         if (error) {
-           console.log(error);
+           console.log("get gamestate error " + error);
            response.status(500).json({ error: error });
         } else {
             response.status(200).send(result.Item);
@@ -231,40 +233,51 @@ app.get("/get-gamestate/:id", (request, response) => {
 
 });
 
+// POST Request to register a gamestate
 app.post("/save-gamestate", (request, response) => {
-
+    request.setEncoding('utf8');
+    
+    // get all the gamestate fields
     const GameID = request.body.GameID;
     const inventory = request.body.inventory;
     const blockedRooms = request.body.blockedRooms;
     const visitedRooms = request.body.visitedRooms;
-    const currentRoom = request.body.currentRoom;
+    const currentRoomName = request.body.currentRoomName;
     const poweredRooms = request.body.poweredRooms;
     const unlockedElements = request.body.unlockedElements;
+    const usedItems = request.body.usedItems;
+    const motorState = request.body.motorState;
     
-    console.log(JSON.stringify(request.body))
-
+    // DB update params
     var params = {
         TableName : dbGameStates,
         Key: {
+            // query the button by its ID
             GameID: GameID,
         },
-        UpdateExpression: "set inventory = :i,  blockedRooms = :b, currentRoom = :c, visitedRooms = :v, poweredRooms = :p, unlockedElements = :u ",
+        // update all the gamestate fields
+        UpdateExpression: "set inventory = :i,  blockedRooms = :b, currentRoomName = :c, visitedRooms = :v, poweredRooms = :p, unlockedElements = :u, usedItems = :ui, motorState = :m ",
         ExpressionAttributeValues:{
             ":i": inventory,
             ":b": blockedRooms,
-            ":c": currentRoom,
+            ":c": currentRoomName,
             ":v": visitedRooms,
             ":p": poweredRooms,
-            ":u": unlockedElements
+            ":u": unlockedElements,
+            ":ui": usedItems,
+            ":m": motorState
         },
         ReturnValues:"UPDATED_NEW"
     };
 
+    // use the DynamoDB object provided by the AWS SDK
     dynamoDb.update(params, (error, result) => {
         if (error) {
-           console.log(error);
+            // if there has been an error, log it
+           console.log("saving gamestate error " + error);
            response.status(500).send(error);
         } else {
+            // if everything worked, send succesful message
             response.status(200).send(result.Attributes);
         }
      });
