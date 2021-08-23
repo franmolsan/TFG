@@ -252,7 +252,7 @@ app.post("/save-gamestate", (request, response) => {
     var params = {
         TableName : dbGameStates,
         Key: {
-            // query the button by its ID
+            // query the gamestate by its ID
             GameID: GameID,
         },
         // update all the gamestate fields
