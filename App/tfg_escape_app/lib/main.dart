@@ -211,19 +211,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  Future<void> _launchURLBrowser(String qrID) async {
-    var url = 'http://192.168.1.127:3000/qr-read/' + qrID;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  Future<void> _makePostRequest(String qrID) async {
+  Future<void> makePostRequestScanQR(String qrID) async {
     print(qrID);
     var url = Uri.parse('https://e5bg757f0e.execute-api.eu-west-1.amazonaws.com/dev/qr-read');
     var response = await http.post(url, body: {'qrID': qrID});
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+
+  Future<void> connectUser(String userID) async {
+    print(userID);
+    var url = Uri.parse('https://e5bg757f0e.execute-api.eu-west-1.amazonaws.com/dev/login-user');
+    var response = await http.post(url, body: {'userID': userID});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
@@ -250,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () => scanQR(),
                           child: Text('Start QR scan')),
                       if(_scanBarcode.isNotEmpty) ElevatedButton(
-                          onPressed: () => _makePostRequest(_scanBarcode),
+                          onPressed: () => makePostRequestScanQR(_scanBarcode),
                           child: Text('GO')),
                       Text('Scan result : $_scanBarcode\n',
                           style: TextStyle(fontSize: 20))]
@@ -349,6 +348,80 @@ class _MyHomePageState extends State<MyHomePage> {
       );
   }
 */
+}
+
+/*
+Future<ApiResponse> authenticateUser(String username, String password) async {
+  ApiResponse _apiResponse = new ApiResponse();
+
+  try {
+    final response = await http.post('${_baseUrl}user/login', body: {
+      'username': username,
+      'password': password,
+    });
+
+    switch (response.statusCode) {
+      case 200:
+        _apiResponse.Data = User.fromJson(json.decode(response.body));
+        break;
+      case 401:
+        _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
+        break;
+      default:
+        _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
+        break;
+    }
+  } on SocketException {
+    _apiResponse.ApiError = ApiError(error: "Server error. Please retry");
+  }
+  return _apiResponse;
+}
+*/
+
+
+// Gamestate class
+class GameState {
+
+  String _userID = '';
+
+  String _currentRoomName = '';
+  late List<Map> _inventory;
+
+  // constructor
+  GameState(this._userID, this._currentRoomName, this._inventory);
+
+  // getters
+  String get currentRoomName => _currentRoomName;
+  String get userID => _userID;
+  List<Map> get inventory => _inventory;
+
+
+  // setter
+  set userID(String value) {
+    _userID = value;
+  }
+  set currentRoomName(String value) {
+    _currentRoomName = value;
+  }
+  set inventory(List<Map> value) {
+    _inventory = value;
+  }
+
+  // create the user object from json input
+  GameState.fromJson(Map<String, dynamic> json) {
+    _currentRoomName = json['currentRoomName'];
+    _userID = json['userID'];
+    _inventory = json['inventory'];
+  }
+
+  // export to json
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userID'] = this._userID;
+    data['currentRoomName'] = this._currentRoomName;
+    data['inventory'] = this._inventory;
+    return data;
+  }
 }
 
 

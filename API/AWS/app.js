@@ -117,7 +117,7 @@ app.post("/button-click", (request, response) => {
             buttonID: buttonID,
         },
 
-        // increment click counter
+        // atomic increment of the #clickType counter
         UpdateExpression: "set #clickType = #clickType + :val",
         ExpressionAttributeNames: {
             "#clickType": clickType
@@ -152,6 +152,7 @@ app.post("/qr-read", (request, response) => {
         Key: {
             qrID: qrID,
         },
+        // atomic increment of the TimesRead counter
         UpdateExpression: "set TimesRead = TimesRead + :val",
         ExpressionAttributeValues:{
             ":val": 1
@@ -271,12 +272,11 @@ app.post("/register-new-user", (request, response) => {
     const uid = new ShortUniqueId({ length: 5 });
     
     var generatedUid = uid();
-    console.log("AmazonUserID " + request.body.AmazonUserID);
-    console.log("Generates uid " + generatedUid);
-    console.log("UUID disponibles: " + uid.availableUUIDs(5));
-    console.log("Colision % con 1 millon usuarios: " + uid.collisionProbability(1000000,5));
+    //console.log("AmazonUserID " + request.body.AmazonUserID);
+    //console.log("Generates uid " + generatedUid);
+    //console.log("UUID disponibles: " + uid.availableUUIDs(5));
+    //console.log("Colision % con 1 millon usuarios: " + uid.collisionProbability(1000000,5));
 
-    
     // DB update params
     var params = {
         TableName : dbUserIDs,
@@ -302,6 +302,54 @@ app.post("/register-new-user", (request, response) => {
         } else {
             // if everything worked, send succesful message
             response.status(200).send(result.Attributes);
+        }
+     });
+
+});
+
+// POST Request to register a new user
+app.get("/login-user/:id", (request, response) => {
+    request.setEncoding('utf8');
+
+    const userID = request.params.id
+    
+    // DB params
+    var params = {
+        TableName : dbUserIDs,
+        IndexName: 'userID-index',
+        /*
+        Key: {
+            // query the table
+            userID: userID
+        },*/
+        KeyConditionExpression: 'userID = :uID',
+        ExpressionAttributeValues:{
+            ':uID': userID
+        }
+    };
+    
+
+    // use the DynamoDB object provided by the AWS SDK
+    dynamoDb.query(params, function(error, data) {
+
+        console.log('Check with the userID ' + userID);
+        console.log('Result ' + JSON.stringify(data));
+
+        if (error) {
+            // if there has been an error, log it
+           console.log("login user error " + error);
+           response.status(500).send(error);
+        } else {
+
+            if (data.Count === 1){
+                // if everything worked, send succesful message
+                response.status(200).send("Login succesful"); 
+            }
+            else {
+                // wrong UID
+                response.status(500).send("Wrong User ID");
+            }
+
         }
      });
 
