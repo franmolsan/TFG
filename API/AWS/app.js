@@ -1,11 +1,14 @@
 const serverless = require('serverless-http');
 const express = require('express');
 const bodyParser = require('body-parser');
+const ShortUniqueId = require('short-unique-id');
+
 var AWS = require('aws-sdk');
 const dbButtons =  "buttons";
 const dbQR =  "qrTabla";
 const dbRooms =  "gameRooms";
-const dbGameStates = "gameStates"
+const dbGameStates = "gameStates";
+const dbUserIDs = "userIDs";
 
 AWS.config.update({
     accessKeyId: process.env.accessKeyId,
@@ -228,6 +231,77 @@ app.get("/get-gamestate/:id", (request, response) => {
            response.status(500).json({ error: error });
         } else {
             response.status(200).send(result.Item);
+        }
+     });
+
+});
+
+app.get("/get-userId/:id", (request, response) => {
+    request.setEncoding('utf8');
+    console.log("getting userID");
+    const AmazonUserID = request.params.id;
+    
+    var params = {
+        TableName : dbUserIDs,
+        Key: {
+            AmazonUserID: AmazonUserID
+        }
+    };
+
+    dynamoDb.get(params, (error, result) => {
+        if (error) {
+           console.log("get userID error " + error);
+           response.status(500).json({ error: error });
+        } else {
+            console.log("get userID NO ERROR " + JSON.stringify(result.Item));
+            response.status(200).send(result.Item);
+        }
+     });
+
+});
+
+
+// POST Request to register a new user
+app.post("/register-new-user", (request, response) => {
+    request.setEncoding('utf8');
+    
+    const AmazonUserID = request.body.AmazonUserID;
+    
+    //Instantiate
+    const uid = new ShortUniqueId({ length: 5 });
+    
+    var generatedUid = uid();
+    console.log("AmazonUserID " + request.body.AmazonUserID);
+    console.log("Generates uid " + generatedUid);
+    console.log("UUID disponibles: " + uid.availableUUIDs(5));
+    console.log("Colision % con 1 millon usuarios: " + uid.collisionProbability(1000000,5));
+
+    
+    // DB update params
+    var params = {
+        TableName : dbUserIDs,
+        Key: {
+            // query the table
+            AmazonUserID: AmazonUserID,
+        },
+        // set the userID field
+        UpdateExpression: "set userID = :u",
+        ExpressionAttributeValues:{
+            ":u": generatedUid
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+    
+
+    // use the DynamoDB object provided by the AWS SDK
+    dynamoDb.update(params, (error, result) => {
+        if (error) {
+            // if there has been an error, log it
+           console.log("new user error " + error);
+           response.status(500).send(error);
+        } else {
+            // if everything worked, send succesful message
+            response.status(200).send(result.Attributes);
         }
      });
 
