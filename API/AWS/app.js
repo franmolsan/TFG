@@ -163,7 +163,7 @@ app.post("/qr-read", (request, response) => {
     dynamoDb.update(params, (error, result) => {
         if (error) {
            console.log(error);
-           response.status(500).send(request.body);
+           response.status(500).send(error);
         } else {
             response.status(200).send("QR code succesfully read");
         }
@@ -347,7 +347,7 @@ app.get("/login-user/:id", (request, response) => {
             }
             else {
                 // wrong UID
-                response.status(500).send("Wrong User ID");
+                response.status(501).send("Wrong User ID");
             }
 
         }
