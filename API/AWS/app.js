@@ -131,6 +131,7 @@ app.post("/button-click", (request, response) => {
     // use the DynamoDB object provided by the AWS SDK
     dynamoDb.update(params, (error, result) => {
 
+        console.log(JSON.stringify(result));
         // if there has been an error, log it
         if (error) {
            console.log(error);
@@ -430,8 +431,7 @@ app.post("/scan-diary", (request, response) => {
         Key: {
             GameID: GameID,
         },
-        // atomic increment of the TimesRead counter
-        
+
         UpdateExpression: "set diaryEntriesUnlocked = :d",
         ExpressionAttributeValues:{
             ":d": arrayOfEntries
@@ -446,6 +446,55 @@ app.post("/scan-diary", (request, response) => {
         } else {
             response.status(200).send("Diary entry read succesfully");
         }   
+     });
+
+});
+
+// POST Request to register button clicks ingame
+app.post("/register-button-clicked", (request, response) => {
+
+    // get which button has been clicked
+    // and the click type (long, short, double)
+    const buttonIngameID = request.body.ingameID;
+    const GameID = request.body.GameID;
+
+    const counter = buttonIngameID+"TimesClicked"
+
+    console.log("gameid " + GameID);
+
+    // DB update params
+    var params = {
+
+        // query the button by its ID
+        TableName : dbGameStates,
+        Key: {
+            GameID: GameID,
+        },
+
+        // atomic increment of the #ingameButtonTimesClicked counter
+        UpdateExpression: "set #counter = #counter + :val",
+        ExpressionAttributeNames: {
+            "#counter": counter
+        },
+        ExpressionAttributeValues:{
+            ":val": 1
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    // use the DynamoDB object provided by the AWS SDK
+    dynamoDb.update(params, (error, result) => {
+
+        console.log("try to increment " + counter)
+        console.log(JSON.stringify(result));
+        // if there has been an error, log it
+        if (error) {
+           console.log(error);
+           response.status(500).json({ error: error });
+        } else {
+            // if everything worked, send succesful message
+            response.status(200).send("Button succesfully clicked");
+        }
      });
 
 });
