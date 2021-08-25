@@ -1,0 +1,38 @@
+{
+  "e1":{
+    "entryID": "e1",
+    "date": "20/07/2189",
+    "time": "08:40",
+    "desc": "¡LA TRIPULACIÓN DE FELICITY HACE HISTORIA!\nEs increíble que nadie haya descubierto ni registrado nada sobre este planeta.\nQuizás es por su pequeño tamaño o su posición en la galaxia enana Elíptica de Sagitario, que se encuentra a 70.000 años luz de distancia de la Tierra.\nDebido a su ubicación opuesta al Sistema Solar en relación al centro galáctico, no es un objeto fácil de observar a pesar de su gran diámetro.\nSe trata de una antigua galaxia con poco polvo interestelar y estrellas viejas y pobres en metales; quizás esa falta de recursos la hace menos interesante para la confederación galáctica de exploración y colonización…Pero a nosotros nos suena como un territorio libre de la explotación de esos avaros.\n¿Qué maravillas escondes?"
+  },
+  "e2":{
+    "entryID": "e2",
+    "date": "14/08/2189",
+    "time": "05:36",
+    "desc": "Las primeras exploraciones muestran un entorno favorable: una atmosfera de dióxido de carbono con la contabilidad de oxígeno y nitrógeno, pero en pequeño porcentaje y una gravedad superior a la de la mayoría de planetas habitados por la Unión intergaláctica. \nEsto hace posible la presencia de agua como vimos cerca de nuestra base … ¡Noelle lo puede confirmar; casi cae a un gran estanque!\nApenas se podía diferenciar la presencia de este estanque, como si se tratara de una… ilusión óptica.  Casi como si los ojos humanos no pudieran captar bien su presencia.  Estamos fascinados con este descubrimiento, nunca habíamos visto nada igual. \nPero debemos ser cautelosos, no sabemos que más puede haber en este extraño planeta\n"
+  },
+  "e3":{
+    "entryID": "e3",
+    "date": "15/09/2189",
+    "time": "07:12",
+    "desc": "Hemos organizado las partidas de exploración en grupos siguiendo los tramos temporales en los hay más luz gracias a la estrella cercana cuyo nombre desconocemos. Hemos empezado a llamarla LED (el nombre se le ocurrió a Adama por la similitud con las antiguas luces LED que aportaban luz, pero no calentaban nada, como esta estrella). \nEl grupo de Otto encontró unas rocas muy interesantes en el Espejismo (el estanque que presenta ilusiones ópticas): aunque no reconocemos su composición, Audrey se las llevó al laboratorio y dijo que nos informaría cuando supiera más. De eso hace una semana terrestre.\nMientras tanto los últimos grupos dicen que han visto o, mejor dicho, percibido algunas cosas extrañas: movimientos y ruidos que los seguían. Incluso Noelle dice que vio sombras. Pero el Espejismo crea esa serie de efectos así que… ¿es real lo que percibió?\n"
+  },
+  "e4":{
+    "entryID": "e4",
+    "date": "04/10/2189",
+    "time": "18:53",
+    "desc": "¡Audrey por fin ha salido del laboratorio! Y las noticias son impresionantes: esta especie de roca es un material que alberga muchas calorías y podría ser altamente energético. Según sus investigaciones este material es… ¡orgánico! ¿Habrá alguna criatura que las esté formando?\n"
+  },
+  "e5":{
+    "entryID": "e5",
+    "date": "17/10/2189",
+    "time": "06:38",
+    "desc": "Los acontecimientos han escalado rápidamente.  Toda la tripulación está ahora inquieta y asustada. Algunos miembros sugieren que deberíamos irnos, otros creen que ya es demasiado tarde.  \nLos ruidos y movimientos que referían los exploradores son producidas por criaturas cuadrúpedas y monstruosas. Se han vuelto muy hostiles y han atacado a Otto en la ultima exploración en el Espejismo.  Hemos invadido su hábitat y creemos que las “rocas” que encontramos son su sustento.\nEstamos en graves problemas. Saldremos del planeta mañana por la mañana. \n"
+  },
+  "e6":{
+    "entryID": "e6",
+    "date": "17/10/2189",
+    "time": "10:51",
+    "desc": "¡LAS CRIATURAS HAN ATACADO LA NAVE!  ¡El motor está averiado! ¡Hemos perdido la señal de la radio sónica! \nNo tenemos suficiente comida ni agua para aguantar aislados y menos aún con el peligro de estas violentas criaturas. Sólo queda una opción: la hiper-hibernación\nEnviaremos una señal de socorro de rango cercano: si estás leyendo esto, gracias por acudir a la llamada de auxilio. ¡Rápido! Este planeta no es seguro.  Todo depende de ti. \n\nEspecialista: Isolde Arrah\n"
+  }
+}

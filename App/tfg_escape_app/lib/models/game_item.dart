@@ -1,4 +1,4 @@
-// game_item class
+// GameItem class
 class GameItem {
   final String name ;
   final String desc ;

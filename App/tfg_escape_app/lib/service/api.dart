@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tfg_escape_app/models/api_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:tfg_escape_app/models/game_state.dart';
+import 'package:tfg_escape_app/models/room.dart';
 
 
 Future<ApiResponse> makePostRequestScanQR(String qrID) async {
@@ -87,4 +88,26 @@ Future<GameState> getGamestate(String userID) async {
   } on SocketException {}
 
   return gameState;
+}
+
+Future<Map> getRooms() async {
+  Map<String,Room> rooms = new Map();
+
+  var url = Uri.parse('https://e5bg757f0e.execute-api.eu-west-1.amazonaws.com/dev/get-game-rooms');
+  try {
+    final response =  await http.get(url);
+
+    switch (response.statusCode) {
+      case 200:
+         for (var item in json.decode(response.body)){
+          rooms[item['name']] = (Room.fromJson(item));
+          print("creo room");
+        }
+        break;
+      default:
+        break;
+    }
+  } on SocketException {}
+
+  return rooms;
 }

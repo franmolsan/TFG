@@ -1,5 +1,4 @@
 // Gamestate class
-import 'package:flutter/material.dart';
 
 import 'game_item.dart';
 
@@ -8,7 +7,7 @@ class GameState {
   String _userID = "";
 
   String _currentRoomName = '';
-   List<GameItem> _inventory = [];
+  List<GameItem> _inventory = [];
 
   // constructor
   GameState(this._userID, this._currentRoomName, this._inventory);

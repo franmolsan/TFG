@@ -20,6 +20,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+assets:
+  assets/diary.json
+
 dependencies:
   flutter:
     sdk: flutter
@@ -33,6 +36,7 @@ dependencies:
   http: ^0.13.3
   bottom_navy_bar: ^6.0.0
   shared_preferences: ^2.0.7
+  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:

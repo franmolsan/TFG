@@ -14,13 +14,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _scanBarcode = '';
   int _currentIndex = 0;
-  Future<GameState>? currentGameState;
+  GameState currentGameState = GameState.emptyState();
   PageController _pageController = PageController();
+  String userId = "";
+  Future<Map>? rooms;
+  bool firstBuild = true;
 
+  String currentRoomName = "sala 2";
+
+  void getRoomsAndGamestate(userID) async{
+    rooms =  getRooms();
+    currentGameState = await getGamestate(userID);
+  }
+
+  void getCurrentGamestate(userID) async{
+    currentGameState = await getGamestate(userID);
+  }
 
   @override
   void initState() {
-
     super.initState();
     _pageController = PageController();
   }
@@ -100,22 +112,48 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget RoomScreen (BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.map),
-              title: Text('Map'),
+        child: Column (
+          children: [
+            Container(
+                padding: const EdgeInsets.all(8),
+                 child: Container(
+                     padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                     child:
+                     Text(
+                       'Objetos en ${currentGameState.currentRoomName}',
+                       style: TextStyle(
+                           fontWeight: FontWeight.bold,
+                           color: Colors.blue,
+                           fontSize: 18
+                       ),
+                     )
+                 )
             ),
-            ListTile(
-              leading: Icon(Icons.photo_album),
-              title: Text('Album'),
-            ),
-            ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('Phone'),
-            ),
+            Expanded(
+                child:
+                 FutureBuilder(
+                    future: rooms,
+                    builder:(context, AsyncSnapshot snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      } else {
+                        return Container(
+                             child: ListView.builder(
+
+                                 itemCount: snapshot.data[currentGameState.currentRoomName].elements.length,
+                                 itemBuilder: (BuildContext context, int index) {
+                                   return ListTile(
+                                       title: Text('${snapshot.data[currentGameState.currentRoomName].elements[index].name}')); // [snapshot.data.currentRoomName]._elements[index].name}
+                                 }
+                             )
+                        );
+                      }
+                    }
+                ))
+
           ],
-        ));
+        )
+    );
   }
   Widget InventaryScreen (BuildContext context) {
     return Container(
@@ -123,40 +161,31 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column (
           children: [
             Container(
-            padding: const EdgeInsets.all(8),
-
-              child: Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child:
-                  Text(
-                    'Objetos en el inventario',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                        fontSize: 18
-                  ),
-                )
-    )
+              padding: const EdgeInsets.all(8),
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child:
+                    Text(
+                      'Objetos en el inventario',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 18
+                    ),
+                  )
+              )
             ),
             Expanded(
-            child: FutureBuilder(
-                future: currentGameState,
-                builder:(context, AsyncSnapshot snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return Container(
-                        child: ListView.builder(
-                            itemCount: snapshot.data.inventory.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                  title: Text('${snapshot.data.inventory[index].name}'));
-                            }
-                        )
-                    );
-                  }
-                }
-            ))
+              child: Container(
+                   child: ListView.builder(
+                       itemCount: currentGameState.inventory.length,
+                       itemBuilder: (BuildContext context, int index) {
+                         return ListTile(
+                            title: Text('${currentGameState.inventory[index].name}'));
+                     }
+                  ),
+              )
+            )
           ],
         )
       );
@@ -165,14 +194,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context)!.settings.arguments.toString();
+
+    if (firstBuild){
+      print ("se construye");
+      userId = ModalRoute.of(context)!.settings.arguments.toString();
+      getRoomsAndGamestate(userId);
+      firstBuild = false;
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text("Escape App")),
       body: SizedBox.expand(
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {
-            currentGameState = getGamestate(userId);
+            getCurrentGamestate(userId);
             setState(() => _currentIndex = index);
           },
           children: <Widget>[
