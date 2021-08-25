@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tfg_escape_app/screens/home.dart';
 import 'package:tfg_escape_app/screens/login.dart';
+import 'package:tfg_escape_app/screens/single_entry.dart';
 import 'landing.dart';
 
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Landing(),
         '/login': (context) => Login(),
         '/home': (context) => MyHomePage(),
+        "/single-entry": (context) => SingleEntry(),
       }
     );
   }

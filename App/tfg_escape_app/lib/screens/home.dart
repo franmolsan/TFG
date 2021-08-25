@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:tfg_escape_app/models/diary_entry.dart';
 import 'package:tfg_escape_app/models/game_state.dart';
 import 'package:tfg_escape_app/service/api.dart';
 
@@ -19,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String userId = "";
   Future<Map>? rooms;
   bool firstBuild = true;
+  Map diaryEntries = new Map();
 
   String currentRoomName = "sala 2";
 
@@ -29,6 +33,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void getCurrentGamestate(userID) async{
     currentGameState = await getGamestate(userID);
+  }
+
+  void readJson() async {
+    final String response = await rootBundle.loadString('assets/diary.json');
+
+    Map responseJson = json.decode(response);
+    responseJson.forEach((key, value) {
+      diaryEntries[key] = (DiaryEntry.fromJson(value));
+      print("creo entrada diario");
+    });
+  }
+
+  // This function is triggered when the user tap on a product
+  void _goToSingle(context, entry) {
+    Navigator.of(context)
+        .pushNamed("/single-entry", arguments: entry);
   }
 
   @override
@@ -91,22 +111,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget DiaryScreen (BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.map),
-              title: Text('Map'),
+        child: Column (
+          children: [
+            Container(
+                padding: const EdgeInsets.all(8),
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    child:
+                    Text(
+                      'Entradas del diario',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 18
+                      ),
+                    )
+                )
             ),
-            ListTile(
-              leading: Icon(Icons.photo_album),
-              title: Text('Album'),
-            ),
-            ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('Phone'),
-            ),
+            Expanded(
+                child: Container(
+                  child: ListView.builder(
+                      itemCount: currentGameState.diaryEntriesUnlocked.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return TextButton(
+                            onPressed: () =>_goToSingle(context, diaryEntries[currentGameState.diaryEntriesUnlocked[index]]),
+                            child: ListTile(
+                              title: Text(diaryEntries[currentGameState.diaryEntriesUnlocked[index]].date),
+                              subtitle: Text(diaryEntries[currentGameState.diaryEntriesUnlocked[index]].time),
+                            )
+                        );
+                      }
+                  ),
+                )
+            )
           ],
-        ));
+        )
+    );
   }
 
   Widget RoomScreen (BuildContext context) {
@@ -139,7 +179,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       } else {
                         return Container(
                              child: ListView.builder(
-
                                  itemCount: snapshot.data[currentGameState.currentRoomName].elements.length,
                                  itemBuilder: (BuildContext context, int index) {
                                    return ListTile(
@@ -199,6 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print ("se construye");
       userId = ModalRoute.of(context)!.settings.arguments.toString();
       getRoomsAndGamestate(userId);
+      readJson();
       firstBuild = false;
     }
 

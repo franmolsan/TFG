@@ -5,12 +5,12 @@ import 'game_item.dart';
 class GameState {
 
   String _userID = "";
-
   String _currentRoomName = '';
+  List <String> _diaryEntriesUnlocked = [];
   List<GameItem> _inventory = [];
 
   // constructor
-  GameState(this._userID, this._currentRoomName, this._inventory);
+  GameState(this._userID, this._currentRoomName, this._inventory, this._diaryEntriesUnlocked);
 
   GameState.emptyState();
 
@@ -18,6 +18,7 @@ class GameState {
   String get currentRoomName => _currentRoomName;
   String get userID => _userID;
   List<GameItem> get inventory => _inventory;
+  List<String> get diaryEntriesUnlocked => _diaryEntriesUnlocked;
 
   // setters
   set userID(String value) {
@@ -29,15 +30,15 @@ class GameState {
   set inventory(List<GameItem> value) {
     _inventory = value;
   }
+  set diaryEntriesUnlocked(List<String> value) {
+    _diaryEntriesUnlocked = value;
+  }
 
   // create the user object from json input
   GameState.fromJson(Map<String, dynamic> json) {
     _currentRoomName = json['currentRoomName'];
      userID = json['GameID'] ;
-
-     // if (_inventory.length != 0){
-     //   _inventory.clear();
-     // }
+    diaryEntriesUnlocked = new List<String>.from(json['diaryEntriesUnlocked']);
 
     for (var item in json['inventory']){
       _inventory.add(GameItem.fromJson(item));
