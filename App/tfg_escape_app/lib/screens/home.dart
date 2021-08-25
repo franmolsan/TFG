@@ -70,12 +70,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> scanQR() async {
-    String barcodeScanRes;
+    String barcodeScanRes = "";
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
+      print("barcodeScanRes: " +barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -86,25 +86,50 @@ class _MyHomePageState extends State<MyHomePage> {
     if (!mounted) return;
 
     setState(() {
-      _scanBarcode = barcodeScanRes;
+      if (barcodeScanRes != "-1") {
+        _scanBarcode = barcodeScanRes;
+      }
     });
   }
 
   Widget QRScreen (BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
         alignment: Alignment.center,
         child: Flex(
             direction: Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+               new Image.asset(
+                'images/qr-scan.png',
+                height: 120.0
+              ),
+
+              SizedBox(height: size.height * 0.03),
+
               ElevatedButton(
                   onPressed: () => scanQR(),
-                  child: Text('Start QR scan')),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      onPrimary: Colors.white,
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
+                      padding: EdgeInsets.only(
+                          left: 60,
+                          right: 60,
+                          top: 15,
+                          bottom: 15
+                      )),
+                  child: Text('Escanea QR')
+              ),
+
+              if(_scanBarcode.isNotEmpty) SizedBox(height: size.height * 0.06),
+              if(_scanBarcode.isNotEmpty) Text('ID código : $_scanBarcode\n',
+                  style: TextStyle(fontSize: 20)),
+              if(_scanBarcode.isNotEmpty) SizedBox(height: size.height * 0.03),
               if(_scanBarcode.isNotEmpty) ElevatedButton(
-                  onPressed: () => makePostRequestScanQR(_scanBarcode),
-                  child: Text('GO')),
-              Text('Scan result : $_scanBarcode\n',
-                  style: TextStyle(fontSize: 20))]
+                  onPressed: () => makePostRequestScanQR(_scanBarcode, currentGameState),
+                  child: Icon(Icons.arrow_forward)),
+            ]
         ));
   }
 
@@ -268,19 +293,27 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
               title: Text('Escanear QR'),
-              icon: Icon(Icons.qr_code_scanner)
+              icon: Icon(Icons.qr_code_scanner),
+              inactiveColor: Colors.black,
+              activeColor: Colors.black
           ),
           BottomNavyBarItem(
               title: Text('Diario'),
-              icon: Icon(Icons.book)
+              icon: Icon(Icons.book),
+              inactiveColor: Colors.lightGreen,
+              activeColor: Colors.lightGreen
           ),
           BottomNavyBarItem(
               title: Text('Sala'),
-              icon: Icon(Icons.room)
+              icon: Icon(Icons.room),
+            inactiveColor: Colors.deepOrangeAccent,
+            activeColor: Colors.deepOrangeAccent
           ),
           BottomNavyBarItem(
               title: Text('Inventario'),
-              icon: Icon(Icons.inventory)
+              icon: Icon(Icons.inventory),
+              inactiveColor: Colors.teal,
+              activeColor: Colors.teal
           ),
         ],
       ),

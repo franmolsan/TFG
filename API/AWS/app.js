@@ -406,5 +406,49 @@ app.post("/save-gamestate", (request, response) => {
 
 });
 
+app.post("/scan-diary", (request, response) => {
+
+    // we receive the entries unlocked as a string
+    // so we have to format it first
+    var diaryEntriesUnlocked = request.body.diaryEntriesUnlocked;
+    const GameID = request.body.GameID;
+    
+    // delete whitespaces
+    diaryEntriesUnlocked = diaryEntriesUnlocked.replace(/\s+/g, '')
+
+    // delete '[' and ']'
+    diaryEntriesUnlocked = diaryEntriesUnlocked.replace('[', '');
+    diaryEntriesUnlocked = diaryEntriesUnlocked.replace(']', '');
+
+    // now we have the array of entryIDs, ready to be saved in the DB
+    const arrayOfEntries = diaryEntriesUnlocked.split(',')
+
+    console.log(arrayOfEntries);
+
+    var params = {
+        TableName : dbGameStates,
+        Key: {
+            GameID: GameID,
+        },
+        // atomic increment of the TimesRead counter
+        
+        UpdateExpression: "set diaryEntriesUnlocked = :d",
+        ExpressionAttributeValues:{
+            ":d": arrayOfEntries
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    dynamoDb.update(params, (error, result) => {
+        if (error) {
+           console.log(error);
+           response.status(500).send(error);
+        } else {
+            response.status(200).send("Diary entry read succesfully");
+        }   
+     });
+
+});
+
 
 module.exports.handler = serverless(app);

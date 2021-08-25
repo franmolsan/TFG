@@ -8,34 +8,57 @@ import 'package:tfg_escape_app/models/game_state.dart';
 import 'package:tfg_escape_app/models/room.dart';
 
 
-Future<ApiResponse> makePostRequestScanQR(String qrID) async {
+Future<ApiResponse> makePostRequestScanQR(String qrID, GameState gamestate) async {
   print(qrID);
   ApiResponse _apiResponse = new ApiResponse();
 
-  var url = Uri.parse('https://e5bg757f0e.execute-api.eu-west-1.amazonaws.com/dev/qr-read');
 
-  try {
-    final response = await await http.post(url, body: {'qrID': qrID});
+  var entriesUnlocked = List<String>.from(gamestate.diaryEntriesUnlocked);
+  
+  var url = Uri.parse('https://e5bg757f0e.execute-api.eu-west-1.amazonaws.com/dev/scan-diary');
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  final entry = entriesUnlocked.firstWhere((element) =>
+                element == qrID,
+                    orElse: () {
+                      return "";
+                    });
 
-    switch (response.statusCode) {
-      case 200:
-        _apiResponse.data = response.body;
-        break;
-      case 500:
-        _apiResponse.apiError = json.decode(response.body);
-        break;
-      default:
-        _apiResponse.apiError = json.decode(response.body);
-        break;
+
+  print("entry: " + entry);
+  if (entry == ""){
+
+    if (qrID == "e1" || qrID == "e2" || qrID == "e3" || qrID == "e4" ||qrID == "e5" || qrID == "e6"){
+      entriesUnlocked.add(qrID);
     }
-  } on SocketException {
-      _apiResponse.apiError = "Server error. Please retry";
-      _apiResponse.error = "Server error. Please retry";
+
   }
 
+  print("entriesUnlocked: " +entriesUnlocked.toString());
+  print("gamestate.diaryEntriesUnlocked: " +gamestate.diaryEntriesUnlocked.toString());
+
+  if(entriesUnlocked !=  gamestate.diaryEntriesUnlocked){
+    try {
+      final response = await await http.post(url, body: {'diaryEntriesUnlocked': entriesUnlocked.toString(), 'GameID':gamestate.userID});
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      switch (response.statusCode) {
+        case 200:
+          _apiResponse.data = response.body;
+          break;
+        case 500:
+          _apiResponse.apiError = json.decode(response.body);
+          break;
+        default:
+          _apiResponse.apiError = json.decode(response.body);
+          break;
+      }
+    } on SocketException {
+      _apiResponse.apiError = "Server error. Please retry";
+      _apiResponse.error = "Server error. Please retry";
+    }
+  }
   return _apiResponse;
 }
 
