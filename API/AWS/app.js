@@ -414,18 +414,18 @@ app.post("/scan-diary", (request, response) => {
     // so we have to format it first
     var diaryEntriesUnlocked = request.body.diaryEntriesUnlocked;
     const GameID = request.body.GameID;
-    
-    // delete whitespaces
-    diaryEntriesUnlocked = diaryEntriesUnlocked.replace(/\s+/g, '')
 
     // delete '[' and ']'
     diaryEntriesUnlocked = diaryEntriesUnlocked.replace('[', '');
     diaryEntriesUnlocked = diaryEntriesUnlocked.replace(']', '');
 
+    // delete whitespaces
+    diaryEntriesUnlocked = diaryEntriesUnlocked.replace(/\s+/g, '')
+
     // now we have the array of entryIDs, ready to be saved in the DB
     const arrayOfEntries = diaryEntriesUnlocked.split(',')
 
-    console.log(arrayOfEntries);
+    console.log("arrayOfEntries: " + arrayOfEntries);
 
     var params = {
         TableName : dbGameStates,

@@ -27,7 +27,7 @@ Future<ApiResponse> makePostRequestScanQR(String qrID, GameState gamestate) asyn
   print("entry: " + entry);
   if (entry == ""){
 
-    if (qrID == "e1" || qrID == "e2" || qrID == "e3" || qrID == "e4" ||qrID == "e5" || qrID == "e6"){
+    if (qrID == "e1,e2,e3" || qrID == "e4,e5,e6" || qrID == "e1" ||  qrID == "e2" || qrID == "e3" || qrID == "e4" ||qrID == "e5" || qrID == "e6"){
       entriesUnlocked.add(qrID);
     }
 
