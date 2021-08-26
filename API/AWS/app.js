@@ -118,12 +118,13 @@ app.post("/button-click", (request, response) => {
         },
 
         // atomic increment of the #clickType counter
-        UpdateExpression: "set #clickType = #clickType + :val",
+        UpdateExpression: "set #clickType = if_not_exists(#clickType, :zero) + :val",
         ExpressionAttributeNames: {
             "#clickType": clickType
         },
         ExpressionAttributeValues:{
-            ":val": 1
+            ":val": 1,
+            ":zero": 0
         },
         ReturnValues:"UPDATED_NEW"
     };
@@ -454,7 +455,7 @@ app.post("/scan-diary", (request, response) => {
 app.post("/register-button-clicked", (request, response) => {
 
     // get which button has been clicked
-    // and the click type (long, short, double)
+    // and the GameID
     const buttonIngameID = request.body.ingameID;
     const GameID = request.body.GameID;
 
@@ -471,13 +472,14 @@ app.post("/register-button-clicked", (request, response) => {
             GameID: GameID,
         },
 
-        // atomic increment of the #ingameButtonTimesClicked counter
-        UpdateExpression: "set #counter = #counter + :val",
+        // atomic increment of the counter
+        UpdateExpression: "set #counter = if_not_exists(#counter, :zero) + :val",
         ExpressionAttributeNames: {
             "#counter": counter
         },
         ExpressionAttributeValues:{
-            ":val": 1
+            ":val": 1,
+            ":zero": 0
         },
         ReturnValues:"UPDATED_NEW"
     };
@@ -499,5 +501,56 @@ app.post("/register-button-clicked", (request, response) => {
 
 });
 
+
+// POST Request to register button clicks ingame
+app.post("/register-sequence-button-clicked", (request, response) => {
+
+    // get which button has been clicked
+    // and the value of the click
+    const buttonIngameID = request.body.ingameID;
+    const GameID = request.body.GameID;
+    const value = request.body.value;
+    const counter = buttonIngameID+"ValueOfClicks"
+
+    console.log("gameid " + GameID);
+    console.log("value of click " + value);
+
+    // DB update params
+    var params = {
+
+        // query the button by its ID
+        TableName : dbGameStates,
+        Key: {
+            GameID: GameID,
+        },
+
+        // atomic increment of the counter
+        UpdateExpression: "set #counter = if_not_exists(#counter, :zero) + :val",
+        ExpressionAttributeNames: {
+            "#counter": counter
+        },
+        ExpressionAttributeValues:{
+            ":val": value,
+            ":zero": 0
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    // use the DynamoDB object provided by the AWS SDK
+    dynamoDb.update(params, (error, result) => {
+
+        console.log("try to increment " + counter)
+        console.log(JSON.stringify(result));
+        // if there has been an error, log it
+        if (error) {
+           console.log(error);
+           response.status(500).json({ error: error });
+        } else {
+            // if everything worked, send succesful message
+            response.status(200).send("Button succesfully clicked");
+        }
+     });
+
+});
 
 module.exports.handler = serverless(app);
