@@ -233,7 +233,13 @@ app.get("/get-gamestate/:id", (request, response) => {
            console.log("get gamestate error " + error);
            response.status(500).json({ error: error });
         } else {
-            response.status(200).send(result.Item);
+            if(result.item){
+                response.status(200).send(result.Item);
+            }
+            else {
+                console.log("gamestate not found");
+                response.status(200).send({}) // send empty Object;
+            }
         }
      });
 

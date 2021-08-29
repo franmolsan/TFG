@@ -191,7 +191,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-escape/dev/1630011608261-2021-08-26T21:00:08.261Z/api-escape.zip"
+                "S3Key": "serverless/api-escape/dev/1630271840766-2021-08-29T21:17:20.766Z/api-escape.zip"
               },
               "Handler": "app.handler",
               "Runtime": "nodejs12.x",
@@ -209,14 +209,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionp11BdOixYyudIBGYBNOYmIiAyJIIb23GuDLKyED4AM": {
+          "AppLambdaVersionX2cU62ost9FzWk2MBOnR74P270vubc9me33mPElCZs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "ViVryJDr2O8xePwUhued360VA01MT32wyqxlzMvlCqM="
+              "CodeSha256": "T2vdtFSu0s5TNSQFBq00ANhKXFtHct3tGOaHd6pePO8="
             }
           },
           "ApiGatewayRestApi": {
@@ -341,7 +341,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1630011604143": {
+          "ApiGatewayDeployment1630271837189": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -404,7 +404,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionp11BdOixYyudIBGYBNOYmIiAyJIIb23GuDLKyED4AM"
+              "Ref": "AppLambdaVersionX2cU62ost9FzWk2MBOnR74P270vubc9me33mPElCZs"
             },
             "Export": {
               "Name": "sls-api-escape-dev-AppLambdaFunctionQualifiedArn"
@@ -540,7 +540,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionp11BdOixYyudIBGYBNOYmIiAyJIIb23GuDLKyED4AM"
+        "versionLogicalId": "AppLambdaVersionX2cU62ost9FzWk2MBOnR74P270vubc9me33mPElCZs"
       }
     },
     "configValidationMode": "warn",
@@ -564,7 +564,7 @@
     "artifact": "C:\\Users\\franm\\Documents\\GitHub\\TFG\\TFG\\API\\AWS\\.serverless\\api-escape.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/api-escape/dev/1630011608261-2021-08-26T21:00:08.261Z",
+    "artifactDirectoryName": "serverless/api-escape/dev/1630271840766-2021-08-29T21:17:20.766Z",
     "artifact": "api-escape.zip"
   }
 }

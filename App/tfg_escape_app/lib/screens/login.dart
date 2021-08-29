@@ -63,7 +63,7 @@ class Login extends StatelessWidget {
                 "Introduce tu ID de usuario",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2661FA),
+                    color: Colors.blue,
                     fontSize: 36
                 ),
                 textAlign: TextAlign.left,

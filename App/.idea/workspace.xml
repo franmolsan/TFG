@@ -23,12 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76e80982-9860-4ca3-b1e2-12423c9c4c55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../API/AWS/.serverless/api-escape.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../API/AWS/.serverless/api-escape.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../API/AWS/.serverless/cloudformation-template-update-stack.json" beforeDir="false" afterPath="$PROJECT_DIR$/../API/AWS/.serverless/cloudformation-template-update-stack.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../API/AWS/.serverless/serverless-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/../API/AWS/.serverless/serverless-state.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../API/AWS/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../API/AWS/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/service/api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/service/api.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/screens/login.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,6 @@
   </component>
   <component name="RunManager">
     <configuration name="movil" type="FlutterRunConfigurationType" factoryName="Flutter">
-      <option name="additionalArgs" value="--release" />
       <option name="filePath" value="$PROJECT_DIR$/tfg_escape_app/lib/main.dart" />
       <method v="2" />
     </configuration>
@@ -109,11 +105,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="582" y="182" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1629883412792" />
-    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1629920648086">
+    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1630228784220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629748875554" />
-    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1629920648086" />
+    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630228784220" />
     <state x="718" y="166" key="#com.intellij.ide.util.MemberChooser" timestamp="1629839512038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -132,26 +128,26 @@
     </state>
     <state x="755" y="215" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629748763265" />
     <state x="1006" y="215" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1623405123321" />
-    <state width="1863" height="266" key="GridCell.Tab.0.bottom" timestamp="1630012207216">
+    <state width="1863" height="266" key="GridCell.Tab.0.bottom" timestamp="1630236200789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793699" />
-    <state width="1863" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630012207216" />
-    <state width="1863" height="266" key="GridCell.Tab.0.center" timestamp="1630012207216">
+    <state width="1863" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
+    <state width="1863" height="266" key="GridCell.Tab.0.center" timestamp="1630236200789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630012207216" />
-    <state width="1863" height="266" key="GridCell.Tab.0.left" timestamp="1630012207216">
+    <state width="1863" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
+    <state width="1863" height="266" key="GridCell.Tab.0.left" timestamp="1630236200789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630012207216" />
-    <state width="1863" height="266" key="GridCell.Tab.0.right" timestamp="1630012207216">
+    <state width="1863" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
+    <state width="1863" height="266" key="GridCell.Tab.0.right" timestamp="1630236200789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630012207216" />
+    <state width="1863" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
     <state x="254" y="0" key="SettingsEditor" timestamp="1629878833519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -12,6 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // hide the debug banner
+      debugShowCheckedModeBanner: false,
       title: 'Escape App',
       routes: {
         '/': (context) => Landing(),
