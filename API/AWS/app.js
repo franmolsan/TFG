@@ -220,6 +220,8 @@ app.get("/get-gamestate/:id", (request, response) => {
     request.setEncoding('utf8');
     console.log("getting gamestate");
     const GameID = request.params.id;
+
+    console.log("GAME ID:" + GameID);
     
     var params = {
         TableName : dbGameStates,
@@ -233,7 +235,7 @@ app.get("/get-gamestate/:id", (request, response) => {
            console.log("get gamestate error " + error);
            response.status(500).json({ error: error });
         } else {
-            if(result.item){
+            if(result.Item){
                 response.status(200).send(result.Item);
             }
             else {
