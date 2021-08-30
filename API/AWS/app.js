@@ -263,7 +263,13 @@ app.get("/get-userId/:id", (request, response) => {
            response.status(500).json({ error: error });
         } else {
             console.log("get userID NO ERROR " + JSON.stringify(result.Item));
-            response.status(200).send(result.Item);
+            if(result.item){
+                response.status(200).send(result.Item);
+            }
+            else {
+                console.log("userID not found");
+                response.status(200).send({}) // send empty Object;
+            }
         }
      });
 
@@ -315,7 +321,7 @@ app.post("/register-new-user", (request, response) => {
 
 });
 
-// POST Request to register a new user
+// POST Request to login a new user
 app.get("/login-user/:id", (request, response) => {
     request.setEncoding('utf8');
 
