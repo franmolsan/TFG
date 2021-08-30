@@ -263,7 +263,7 @@ app.get("/get-userId/:id", (request, response) => {
            response.status(500).json({ error: error });
         } else {
             console.log("get userID NO ERROR " + JSON.stringify(result.Item));
-            if(result.item){
+            if(result.Item){
                 response.status(200).send(result.Item);
             }
             else {
