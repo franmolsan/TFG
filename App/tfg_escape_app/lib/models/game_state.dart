@@ -38,12 +38,14 @@ class GameState {
   GameState.fromJson(Map<String, dynamic> json) {
     _currentRoomName = json['currentRoomName'];
      userID = json['GameID'] ;
-    diaryEntriesUnlocked = new List<String>.from(json ['diaryEntriesUnlocked']);
 
-    for (var item in diaryEntriesUnlocked){
-      print("diaryEntriesUnlocked created from json " + item);
-    }
+     if(json ['diaryEntriesUnlocked'] != null){
+       diaryEntriesUnlocked = new List<String>.from(json ['diaryEntriesUnlocked']);
 
+       for (var item in diaryEntriesUnlocked){
+         print("diaryEntriesUnlocked created from json " + item);
+       }
+     }
 
     for (var item in json['inventory']){
       _inventory.add(GameItem.fromJson(item));

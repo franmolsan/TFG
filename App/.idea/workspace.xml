@@ -23,9 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76e80982-9860-4ca3-b1e2-12423c9c4c55" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tfg_escape_app/lib/screens/item_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/models/game_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/models/game_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/models/game_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/models/game_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/screens/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/screens/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfg_escape_app/lib/service/api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/tfg_escape_app/lib/service/api.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +61,7 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -128,31 +132,31 @@
     </state>
     <state x="755" y="215" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629748763265" />
     <state x="1006" y="215" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1623405123321" />
-    <state width="1863" height="266" key="GridCell.Tab.0.bottom" timestamp="1630236200789">
+    <state width="1863" height="266" key="GridCell.Tab.0.bottom" timestamp="1630596628825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793699" />
-    <state width="1863" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
-    <state width="1863" height="266" key="GridCell.Tab.0.center" timestamp="1630236200789">
+    <state width="1863" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630596628825" />
+    <state width="1863" height="266" key="GridCell.Tab.0.center" timestamp="1630596628825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
-    <state width="1863" height="266" key="GridCell.Tab.0.left" timestamp="1630236200789">
+    <state width="1863" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630596628825" />
+    <state width="1863" height="266" key="GridCell.Tab.0.left" timestamp="1630596628825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
-    <state width="1863" height="266" key="GridCell.Tab.0.right" timestamp="1630236200789">
+    <state width="1863" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630596628825" />
+    <state width="1863" height="266" key="GridCell.Tab.0.right" timestamp="1630596628825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1863" height="266" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629799793698" />
-    <state width="1863" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630236200789" />
-    <state x="254" y="0" key="SettingsEditor" timestamp="1629878833519">
+    <state width="1863" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630596628825" />
+    <state x="254" y="0" key="SettingsEditor" timestamp="1630591656709">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="351" y="78" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629748772170" />
-    <state x="254" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1629878833519" />
+    <state x="254" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1630591656709" />
     <state x="599" y="41" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1629883212083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

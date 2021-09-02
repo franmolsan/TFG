@@ -45,10 +45,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // This function is triggered when the user tap on a product
+  // This function is triggered when the user tap on a diary entry
   void _goToSingle(context, entry) {
     Navigator.of(context)
         .pushNamed("/single-entry", arguments: entry);
+  }
+
+  // This function is triggered when the user tap on a diary entry
+  void _goToItemScreen(context, item) {
+    Navigator.of(context)
+        .pushNamed("/item-screen", arguments: item);
   }
 
   @override
@@ -206,8 +212,24 @@ class _MyHomePageState extends State<MyHomePage> {
                              child: ListView.builder(
                                  itemCount: snapshot.data[currentGameState.currentRoomName].elements.length,
                                  itemBuilder: (BuildContext context, int index) {
-                                   return ListTile(
-                                       title: Text('${snapshot.data[currentGameState.currentRoomName].elements[index].name}')); // [snapshot.data.currentRoomName]._elements[index].name}
+                                   return Container(
+                                      child: Card(
+                                       child: new InkWell(
+                                        onTap: () =>_goToItemScreen(context, snapshot.data[currentGameState.currentRoomName].elements[index]),
+                                         splashColor: Colors.blue.withAlpha(30),
+                                         child: Container(
+                                             padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                                             child: Text('${snapshot.data[currentGameState.currentRoomName].elements[index].name}',
+                                                 style: TextStyle(
+                                                     fontWeight: FontWeight.bold,
+                                                     color: Colors.black
+                                                 ),
+                                               textAlign: TextAlign.center,
+                                            )
+                                         ),
+                                       ),
+                                     )
+                                   );
                                  }
                              )
                         );
@@ -244,8 +266,27 @@ class _MyHomePageState extends State<MyHomePage> {
                    child: ListView.builder(
                        itemCount: currentGameState.inventory.length,
                        itemBuilder: (BuildContext context, int index) {
+                         return Container(
+                             child: Card(
+                               child: new InkWell(
+                                 onTap: () =>_goToItemScreen(context, currentGameState.inventory[index]),
+                                 splashColor: Colors.blue.withAlpha(30),
+                                 child: Container(
+                                     padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                                     child: Text('${currentGameState.inventory[index].name}',
+                                       style: TextStyle(
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.black
+                                       ),
+                                       textAlign: TextAlign.center,
+                                     )
+                                 ),
+                               ),
+                             )
+                         );
                          return ListTile(
                             title: Text('${currentGameState.inventory[index].name}'));
+
                      }
                   ),
               )

@@ -27,7 +27,7 @@ Future<ApiResponse> makePostRequestScanQR(String qrID, GameState gamestate) asyn
   print("entry: " + entry);
   if (entry == ""){
 
-    if (qrID == "e1,e2,e3" || qrID == "e4,e5,e6" || qrID == "e1" ||  qrID == "e2" || qrID == "e3" || qrID == "e4" ||qrID == "e5" || qrID == "e6"){
+    if (qrID == "e1,e2,e3" || qrID == "e4,e5" || qrID == "e1" ||  qrID == "e2" || qrID == "e3" || qrID == "e4" ||qrID == "e5" || qrID == "e6"){
       entriesUnlocked.add(qrID);
     }
 
@@ -102,8 +102,10 @@ Future<GameState> getGamestate(String userID) async {
     final response =  await http.get(url);
 
     switch (response.statusCode) {
-      case 200:
+      case 200: {
+        print(response.body);
         gameState = GameState.fromJson(json.decode(response.body));
+      }
         break;
       default:
         break;
