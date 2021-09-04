@@ -397,7 +397,7 @@
                 {
                     "type": "AlexaHeadline",
                     "primaryText": "${myDocumentData.title}",
-                    "secondaryText":"Tu id de usuario es ${myDocumentData.userID}",
+                    "secondaryText":"ID de usuario: ${myDocumentData.userID}",
                     "footerHintText": "Dí, \"Alexa, dime las instrucciones\"",
                     "backgroundImageSource": "https://escapemedia.s3.eu-west-1.amazonaws.com/imagenesJuego/planetBackground.jpeg",
                     "theme": "dark",

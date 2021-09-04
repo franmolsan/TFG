@@ -38,24 +38,31 @@ const LaunchRequestHandler = {
             var userIDArray = Array.from(userIDString);
             
             // userID speech
-            speakOutput += "Tu ID de usuario para conectarse a la aplicación es "
+            speakOutput += strings.YOUR_USERID_IS_MESSAGE
             userIDArray.forEach(function (item, index) {
-                speakOutput +=  item + ". "; 
+                speakOutput +=  item + "<break time=\"1s\"/>"; 
             })
 
 
-            // speech
+            // speech - pause between sentences
+            // so the user can understand it better.
+            speakOutput += " " + strings.PREPARE_FIRST_TIME_MESSAGE;
             speakOutput += strings.LANDING_SOUND;
+            speakOutput += "<break time=\"1.5s\"/>"
             speakOutput += strings.FIRST_TIME_START_MESSAGE
-            speakOutput += "<break time=\"2s\"/>"
+            speakOutput += "<break time=\"1s\"/>"
             speakOutput += strings.RELEVANT_EVENTS_MESSAGE
+            speakOutput += "<break time=\"1s\"/>"
+            speakOutput += strings.YOUR_MISSION_IS_MESSAGE
+            speakOutput += "<break time=\"1s\"/>"
+            speakOutput += strings.GUIDE_MESSAGE
             //speakOutput += strings.INSTRUCTIONS_MESSAGE
             //repromptText = strings.REPROMPT_INSTRUCTION_MESSAGE
             attributesSetter.setInitialGamestate(handlerInput);
              
             const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
             // set question asked 
-            attributesSetter.setQuestion(handlerInput,'HasEntendidoInstrucciones');
+            //attributesSetter.setQuestion(handlerInput,'HasEntendidoInstrucciones');
             
             sessionAttributes.gamestate.currentRoom = itemAndRoomsManager.searchRoom(handlerInput, "sala inicial");
         }
@@ -501,7 +508,7 @@ const WhatIsMyUserIDIntentHandler = {
             
         // userID speech
         userIDArray.forEach(function (item, index) {
-            speakOutput +=  item + ". "; 
+            speakOutput +=  item + "<break time=\"1s\"/>"; 
         })
 
         return handlerInput.responseBuilder
