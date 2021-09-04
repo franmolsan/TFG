@@ -1,0 +1,73 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.7",
+        "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+        "theme": "dark",
+        "import": [
+            {
+                "name": "alexa-layouts",
+                "version": "1.4.0"
+            }
+        ],
+        "mainTemplate": {
+            "parameters": [
+                "instructions"
+            ],
+            "items": [
+                {
+                    "type": "AlexaTextList",
+                    "headerTitle": "Comandos del juego",
+                    "backgroundImageSource": "https://escapemedia.s3.eu-west-1.amazonaws.com/imagenesJuego/blackBackground.jpeg",
+                    "listItems": "${instructions.listItems}",
+                    "id": "plantList"
+                }
+            ]
+        }
+    },
+    "datasources": {
+        
+        "instructions": {
+            "listItems": [
+                {
+                  "primaryText": "Para moverse entre salas",
+                  "secondaryText": "Dí: \"Ir a lugar\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                },
+                {
+                  "primaryText": "Para recordar dónde te encuentras",
+                  "secondaryText": "Pregúntame: \"¿Dónde estoy?\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                },
+                {
+                  "primaryText": "Para saber qué hay donde te encuentras",
+                  "secondaryText": "Pídeme: \"Describe la sala\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                },
+                {
+                  "primaryText": "Para saber adónde puedes ir",
+                  "secondaryText": "Di: \"¿Dónde puedo ir?\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                },
+                {
+                  "primaryText": "Para examinar un objeto en detalle",
+                  "secondaryText": "Di: \"Examina el objeto\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                },
+                {
+                  "primaryText": "Para ver que hay en tu inventario",
+                  "secondaryText": "Pregúntame: \"¿Qué tengo en mi inventario?\"",
+                  "secondaryTextPosition": "bottom",
+                  "hideOrdinal": true
+                }
+            ]
+        }
+                
+    },
+    "sources": {}
+}

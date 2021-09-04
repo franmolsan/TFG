@@ -1,0 +1,996 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "escapa del planeta",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "InstructionsIntent",
+          "slots": [],
+          "samples": [
+            "no se como jugar",
+            "ayudame a jugar",
+            "como puedo jugar",
+            "como jugar",
+            "como hago cosas",
+            "como son las instrucciones",
+            "ayudame con los controles",
+            "cuales son los controles",
+            "dime los controles",
+            "no se los controles",
+            "dime las instrucciones"
+          ]
+        },
+        {
+          "name": "GoToIntent",
+          "slots": [
+            {
+              "name": "room",
+              "type": "rooms",
+              "samples": [
+                "llevame a {room}",
+                "quiero ir a {room}",
+                "andar hacia {room}",
+                "hacia {room}",
+                "ir a {room}",
+                "{room}"
+              ]
+            }
+          ],
+          "samples": [
+            "entrar en {room}",
+            "entrar a {room}",
+            "ve al {room}",
+            "ve a la {room}",
+            "dirígite a la {room}",
+            "andar a la {room}",
+            "anda a la {room}",
+            "dirígete al {room}",
+            "andar al {room}",
+            "ir a la {room}",
+            "ir al {room}",
+            "desplazarse hacia {room}",
+            "correr hacia {room}",
+            "andar a {room}",
+            "llevame a {room}",
+            "quiero ir a {room}",
+            "ir a {room}"
+          ]
+        },
+        {
+          "name": "WhereAmIIntent",
+          "slots": [],
+          "samples": [
+            "donde me hallo",
+            "en que sitio estoy",
+            "no se el lugar en el que estoy",
+            "no tengo claro la sala en la que estoy",
+            "dime la sala en la que estoy",
+            "en que lugar estoy",
+            "no se donde estoy",
+            "puedes decirme donde estoy",
+            "donde estoy"
+          ]
+        },
+        {
+          "name": "WhereCanIGoIntent",
+          "slots": [],
+          "samples": [
+            "que lugares están cerca",
+            "que habitaciones tengo cerca",
+            "a que lugar puedo acceder",
+            "hacia donde puedo ir",
+            "hacia donde puedo moverme",
+            "a que lugares puedo ir",
+            "a donde puedo acceder",
+            "hacia donde puedo avanzar",
+            "donde puedo ir"
+          ]
+        },
+        {
+          "name": "RoomDescriptionIntent",
+          "slots": [],
+          "samples": [
+            "describe la sala",
+            "describe la estancia",
+            "dime qué hay en la estancia",
+            "describe la habitación",
+            "qué objetos hay en la estancia",
+            "qué elementos hay en la estancia",
+            "que hay en la estancia",
+            "que hay en la sala",
+            "que hay cerca de mi",
+            "qué tengo a mi alrededor"
+          ]
+        },
+        {
+          "name": "CheckElementIntent",
+          "slots": [
+            {
+              "name": "element",
+              "type": "elements",
+              "samples": [
+                "examina el {element}",
+                "comprueba el {element}",
+                "quiero que compruebes el {element}",
+                "{element}",
+                "la {element}",
+                "las {element}",
+                "los {element}",
+                "el {element}"
+              ]
+            }
+          ],
+          "samples": [
+            "agarra las {element}",
+            "agarra los {element}",
+            "agarra el {element}",
+            "agarra la {element}",
+            "coge el {element}",
+            "coge la {element}",
+            "coge las {element}",
+            "coge los {element}",
+            "agarra {element}",
+            "coge {element}",
+            "describe {element}",
+            "ver {element}",
+            "comprueba los {element}",
+            "inspecciona los {element}",
+            "mira los {element}",
+            "examina los {element}",
+            "examina {element}",
+            "examina las {element}",
+            "mira las {element}",
+            "comprueba las {element}",
+            "Comprueba el {element}",
+            "Inspecciona el {element}",
+            "Chequea el {element}",
+            "Chequea la {element}",
+            "Comprueba la {element}",
+            "Examina la {element}",
+            "Mira la {element}",
+            "Mira el {element}",
+            "Examina el {element}"
+          ]
+        },
+        {
+          "name": "WhatIsInTheInventoryIntent",
+          "slots": [],
+          "samples": [
+            "qué hay en mi inventario",
+            "dime qué he guardado en el inventario",
+            "que tengo en la mochila",
+            "que hay en el inventario",
+            "qué tengo en el inventario"
+          ]
+        },
+        {
+          "name": "EnterCodeIntent",
+          "slots": [
+            {
+              "name": "code",
+              "type": "codes",
+              "samples": [
+                "{code}",
+                "introduce la contraseña {code}",
+                "introduce el codigo {code}",
+                "la contraseña es {code}",
+                "el codigo es {code}"
+              ]
+            }
+          ],
+          "samples": [
+            "la contraseña es {code}",
+            "el codigo es {code}",
+            "Introduce la contraseña {code}",
+            "Introduce el codigo {code}",
+            "Quiero introducir el codigo {code}"
+          ]
+        },
+        {
+          "name": "WhatIsMyUserIDIntent",
+          "slots": [],
+          "samples": [
+            "cual es mi nombre de usuario",
+            "dime mi nombre de usuario",
+            "dime el nombre de usuario",
+            "dime mi identificador",
+            "Cual es mi id de usuario"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "boton deshibernacion",
+                "synonyms": [
+                  "deshibernacion",
+                  "boton de deshibernacion",
+                  "botón de deshibernación"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "boton arranque",
+                "synonyms": [
+                  "boton de despegue",
+                  "despegue",
+                  "botón de despegue",
+                  "botón despegue",
+                  "boton de arranque",
+                  "Arranque",
+                  "Botón de arranque"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "radio",
+                "synonyms": [
+                  "radiorreceptor",
+                  "transistor"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "ordenador",
+                "synonyms": [
+                  "navegador",
+                  "navegación",
+                  "navegacion",
+                  "sistema de navegacion",
+                  "sistema de navegación",
+                  "ordenador de la nave",
+                  "ordenador del sistema de navegacion"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "llave inglesa"
+              }
+            },
+            {
+              "name": {
+                "value": "combustible",
+                "synonyms": [
+                  "roca combustible",
+                  "roca",
+                  "piedra",
+                  "piedra combustible",
+                  "la piedra combustible"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "agua magnetica",
+                "synonyms": [
+                  "botellas de agua magnetica",
+                  "botellas",
+                  "agua",
+                  "agua magnética"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cables"
+              }
+            },
+            {
+              "name": {
+                "value": "caja fuerte"
+              }
+            },
+            {
+              "name": {
+                "value": "frigorifico",
+                "synonyms": [
+                  "nevera",
+                  "frigo",
+                  "frigorífico"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "motor",
+                "synonyms": [
+                  "compartimento",
+                  "compartimento del motor"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "mando"
+              }
+            },
+            {
+              "name": {
+                "value": "escaner medico",
+                "synonyms": [
+                  "escáner médico",
+                  "escáner"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "capsulas regeneracion",
+                "synonyms": [
+                  "capsulas híperhibernación",
+                  "capsulas de hiper-hibernación",
+                  "capsulas de hibernación",
+                  "cápsulas",
+                  "cápsulas regenerativas",
+                  "cápsulas de regeneración"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "nota codigo",
+                "synonyms": [
+                  "nota con el código",
+                  "post it",
+                  "postit con código",
+                  "nota con código"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "libro reparacion motores estelares",
+                "synonyms": [
+                  "libro",
+                  "libro de reparación",
+                  "libro de reparación de motores estelares"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "escalera hiperplegable",
+                "synonyms": [
+                  "escalera plegable",
+                  "escalera"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "herramientas medicas",
+                "synonyms": [
+                  "aparatos médicos",
+                  "herramientas médicas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tercer cajon",
+                "synonyms": [
+                  "tercer cajón del armario",
+                  "tercer cajon del armario",
+                  "cajon 3 del armario",
+                  "tercer cajón del armario móvil",
+                  "cajon 3",
+                  "cajón tres",
+                  "tercer cajón"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "segundo cajon",
+                "synonyms": [
+                  "segundo cajón del armario",
+                  "segundo cajón",
+                  "segundo cajón del armario",
+                  "cajon 2 del armario",
+                  "segundo cajón del armario móvil",
+                  "cajón dos",
+                  "cajon 2",
+                  "segundo cajón"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "primer cajon",
+                "synonyms": [
+                  "primer cajon del armario",
+                  "primer cajón del armario",
+                  "cajon 1 del armario",
+                  "primer cajón del armario móvil",
+                  "cajón tres",
+                  "cajon 3",
+                  "tercer cajón"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "armario movil",
+                "synonyms": [
+                  "armario"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "fuente alimentacion",
+                "synonyms": [
+                  "fuente alimentación",
+                  "fuente de alimentacion"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tarjeta identificacion",
+                "synonyms": [
+                  "tarjeta ID"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "imagenes",
+                "synonyms": [
+                  "foto",
+                  "imagen",
+                  "imágenes",
+                  "fotos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "hiperherramientas",
+                "synonyms": [
+                  "pack de hiperherramientas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "destornillador"
+              }
+            },
+            {
+              "name": {
+                "value": "herramientas",
+                "synonyms": [
+                  "cajon de herramientas",
+                  "caja de herramientas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "conducto",
+                "synonyms": [
+                  "conducto de ventilación",
+                  "ventilación",
+                  "conducto de ventilacion"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "boton",
+                "synonyms": [
+                  "botón"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pantalones",
+                "synonyms": [
+                  "pantalón",
+                  "pantalon"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "armario"
+              }
+            },
+            {
+              "name": {
+                "value": "cajon",
+                "synonyms": [
+                  "cajón"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cama"
+              }
+            },
+            {
+              "name": {
+                "value": "ranuras",
+                "synonyms": [
+                  "ranura para las baterias",
+                  "ranura de pilas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta purificador",
+                "synonyms": [
+                  "puerta de la sala de purificación",
+                  "puerta del purificador"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta sala inicial",
+                "synonyms": [
+                  "puerta de la sala inicial",
+                  "puerta de la habitación inicial"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta sala 4",
+                "synonyms": [
+                  "escotilla de la sala 4",
+                  "escotilla",
+                  "puerta de la cuarta sala",
+                  "puerta de la sala 4"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta sala 3",
+                "synonyms": [
+                  "escotilla de la sala 3",
+                  "escotilla derecha",
+                  "puerta de la sala 3",
+                  "puerta de la tercera sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta sala 2",
+                "synonyms": [
+                  "escotilla de la sala 2",
+                  "escotilla izquierda",
+                  "puerta de la sala dos",
+                  "puerta de la segunda sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "puerta sala 1",
+                "synonyms": [
+                  "puerta de la sala primera",
+                  "puerta de la sala uno"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tarjeta acceso",
+                "synonyms": [
+                  "tarjeta",
+                  "tarjeta de acceso",
+                  "Tarjeta de acceso"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Principito",
+                "synonyms": [
+                  "el libro del principito",
+                  "el principito"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Romeo y Julieta",
+                "synonyms": [
+                  "romeo y julieta",
+                  "el libro de romeo y julieta"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Dracula",
+                "synonyms": [
+                  "drácula",
+                  "el libro de dracula",
+                  "dracula"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tablero",
+                "synonyms": [
+                  "tablero de ajedrez",
+                  "ajedrez"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Quijote",
+                "synonyms": [
+                  "libro quijote",
+                  "el quijote",
+                  "quijote",
+                  "don quijote",
+                  "don quijote de la mancha",
+                  "libro del quijote"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "estanteria",
+                "synonyms": [
+                  "estantes",
+                  "libros",
+                  "estantería"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "baterias",
+                "synonyms": [
+                  "batteries",
+                  "bateria",
+                  "batería",
+                  "pila",
+                  "pilas",
+                  "bateria"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pantallas",
+                "synonyms": [
+                  "televisiones",
+                  "tele",
+                  "pantalla",
+                  "monitor",
+                  "monitores"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sofa",
+                "synonyms": [
+                  "sillon",
+                  "sillón",
+                  "sofá"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "nota",
+                "synonyms": [
+                  "papel",
+                  "Papel"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "termo"
+              }
+            },
+            {
+              "name": {
+                "value": "mesa",
+                "synonyms": [
+                  "tabla",
+                  "table"
+                ]
+              }
+            }
+          ],
+          "name": "elements"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "sala 4",
+                "synonyms": [
+                  "sala de motores",
+                  "sala de máquinas",
+                  "cuarta habitación",
+                  "habitación cuarta",
+                  "cuarta sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "purificador",
+                "synonyms": [
+                  "sala de purificación",
+                  "sala purificador",
+                  "habitación purificadora"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sala 3",
+                "synonyms": [
+                  "tercera habitación",
+                  "habitación tercera",
+                  "sala tercera",
+                  "tercera sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sala 2",
+                "synonyms": [
+                  "habitación segunda",
+                  "segunda habitación",
+                  "sala segunda",
+                  "sala dos",
+                  "segunda sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sala 1",
+                "synonyms": [
+                  "primera habitación",
+                  "habitación 1",
+                  "sala primeraç",
+                  "sala un",
+                  "sala uno",
+                  "primera sala"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sala inicial",
+                "synonyms": [
+                  "inicio",
+                  "habitación inicial"
+                ]
+              }
+            }
+          ],
+          "name": "rooms"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "Felicity",
+                "synonyms": [
+                  "felicity"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "SOS",
+                "synonyms": [
+                  "s.o.s"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Eiffel"
+              }
+            },
+            {
+              "name": {
+                "value": "Pisa"
+              }
+            },
+            {
+              "name": {
+                "value": "Italia"
+              }
+            },
+            {
+              "name": {
+                "value": "Francia"
+              }
+            },
+            {
+              "name": {
+                "value": "Paris",
+                "synonyms": [
+                  "paris",
+                  "París"
+                ]
+              }
+            }
+          ],
+          "name": "codes"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "GoToIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "room",
+              "type": "rooms",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.486290548808.1223146160275"
+              }
+            }
+          ]
+        },
+        {
+          "name": "CheckElementIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "element",
+              "type": "elements",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1575804347716.28748127422"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EnterCodeIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "code",
+              "type": "codes",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.926138765282.335337553978"
+              },
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.206528666189.1593407113375.414735727515"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.486290548808.1223146160275",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "hacia donde quieres ir?"
+          },
+          {
+            "type": "PlainText",
+            "value": "no me he enterado bien. donde quieres ir?"
+          },
+          {
+            "type": "PlainText",
+            "value": "adonde quieres ir?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1575804347716.28748127422",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Qué elemento quieres que examine?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Repíteme lo que quieres que examine."
+          },
+          {
+            "type": "PlainText",
+            "value": "Qué quieres que examine?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.926138765282.335337553978",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Con qué código quieres probar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué código quieres introducir?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Slot.381412516780.1448014764191",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Quieres probar con el código {code} ?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.206528666189.1593407113375.414735727515",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "No creo que ese código sea el correcto. Prueba con otro."
+          }
+        ]
+      }
+    ]
+  },
+  "version": "90"
+}
