@@ -196,7 +196,7 @@ app.get("/get-qr-read/:id", (request, response) => {
   
 });
 
-
+// GET Request to get the room data
 app.get("/get-game-rooms", (request, response) => {
     request.setEncoding('utf8');
     console.log("getting game rooms");
@@ -215,7 +215,7 @@ app.get("/get-game-rooms", (request, response) => {
       });
 });
 
-
+// GET Request to get the gamestate
 app.get("/get-gamestate/:id", (request, response) => {
     request.setEncoding('utf8');
     console.log("getting gamestate");
@@ -247,6 +247,7 @@ app.get("/get-gamestate/:id", (request, response) => {
 
 });
 
+// GET Request to get the userID, given the Amazon ID
 app.get("/get-userId/:id", (request, response) => {
     request.setEncoding('utf8');
     console.log("getting userID");
@@ -501,8 +502,6 @@ app.post("/register-button-clicked", (request, response) => {
     // use the DynamoDB object provided by the AWS SDK
     dynamoDb.update(params, (error, result) => {
 
-        console.log("try to increment " + counter)
-        console.log(JSON.stringify(result));
         // if there has been an error, log it
         if (error) {
            console.log(error);
@@ -516,7 +515,7 @@ app.post("/register-button-clicked", (request, response) => {
 });
 
 
-// POST Request to register button clicks ingame
+// POST Request to register sequence button clicks ingame
 app.post("/register-sequence-button-clicked", (request, response) => {
 
     // get which button has been clicked
@@ -553,8 +552,6 @@ app.post("/register-sequence-button-clicked", (request, response) => {
     // use the DynamoDB object provided by the AWS SDK
     dynamoDb.update(params, (error, result) => {
 
-        console.log("try to increment " + counter)
-        console.log(JSON.stringify(result));
         // if there has been an error, log it
         if (error) {
            console.log(error);
