@@ -2,7 +2,7 @@
 
 ## Francisco José Molina Sánchez
 
-Repositorio para el Trabajo Fin de Grado de Ingeniería Informática, en la Universidad de Granada. Curso 2021/2021.
+Repositorio para el Trabajo Fin de Grado de Ingeniería Informática, en la Universidad de Granada. Curso 2020/2021.
 
 El repositorio tiene cuatro carpetas:
 
