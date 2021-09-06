@@ -80,6 +80,7 @@ function interactWithNormalItem(handlerInput,item){
     // 1st type - those that can be unlocked with an item (i.e. with a screwdriver)
     // 2nd type - those that unlock via interaction with other thing (i.e pressing a button)
     if (!isUnlocked){
+            speakOutput += item.desc
          speakOutput += item.lockedDesc;
          
          // "1st type" locked item (needs another item to be unlocked)
@@ -102,8 +103,15 @@ function interactWithNormalItem(handlerInput,item){
     
     // if the item is not locked
     else {
+        
        // output item description
-        speakOutput += item.desc;
+       if (item.canBeLocked){
+            speakOutput += item.unlockedDesc;
+       }
+       else {
+            speakOutput += item.desc;
+       }
+
         // output elements inside the item
         if (item.elements !== null && item.elements !== undefined){
             
@@ -644,6 +652,7 @@ function useRegularItem (handlerInput, item){
         }
         
         else if (currentRoom.name === "sala 3"){
+            unlockedElements.push("fuente alimentacion")
             unlockedElements.push("pantallas");
             unlockedElements.push("escaner medico");
             

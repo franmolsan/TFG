@@ -88,9 +88,8 @@ const LaunchRequestHandler = {
         else {
             return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt(repromptText)
-            .getResponse(); 
-            
+            .reprompt(repromptText);
+            //getResponse();
         }
 
     }

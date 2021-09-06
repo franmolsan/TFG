@@ -31,6 +31,7 @@
           "name": "InstructionsIntent",
           "slots": [],
           "samples": [
+            "instrucciones",
             "no se como jugar",
             "ayudame a jugar",
             "como puedo jugar",
@@ -338,6 +339,7 @@
               "name": {
                 "value": "escaner medico",
                 "synonyms": [
+                  "escaner",
                   "escáner médico",
                   "escáner"
                 ]
@@ -992,5 +994,5 @@
       }
     ]
   },
-  "version": "90"
+  "version": "92"
 }
