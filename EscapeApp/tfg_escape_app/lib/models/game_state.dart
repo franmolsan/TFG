@@ -1,5 +1,7 @@
 // Gamestate class
 
+import 'package:flutter/material.dart';
+
 import 'game_item.dart';
 
 class GameState {
@@ -8,9 +10,11 @@ class GameState {
   String _currentRoomName = '';
   List <String> _diaryEntriesUnlocked = [];
   List<GameItem> _inventory = [];
+  List <String> _poweredRooms = [];
 
   // constructor
-  GameState(this._userID, this._currentRoomName, this._inventory, this._diaryEntriesUnlocked);
+  GameState(this._userID, this._currentRoomName, this._inventory, this._diaryEntriesUnlocked, this
+  ._poweredRooms);
 
   GameState.emptyState();
 
@@ -19,8 +23,8 @@ class GameState {
   String get userID => _userID;
   List<GameItem> get inventory => _inventory;
   List<String> get diaryEntriesUnlocked => _diaryEntriesUnlocked;
+  List<String> get poweredRooms => _poweredRooms; // setters
 
-  // setters
   set userID(String value) {
     _userID = value;
   }
@@ -34,6 +38,10 @@ class GameState {
     _diaryEntriesUnlocked = value;
   }
 
+  set poweredRooms(List<String> value) {
+    _poweredRooms = value;
+  }
+
   // create the user object from json input
   GameState.fromJson(Map<String, dynamic> json) {
     _currentRoomName = json['currentRoomName'];
@@ -41,10 +49,12 @@ class GameState {
 
      if(json ['diaryEntriesUnlocked'] != null){
        diaryEntriesUnlocked = new List<String>.from(json ['diaryEntriesUnlocked']);
+     }
 
-       for (var item in diaryEntriesUnlocked){
-         print("diaryEntriesUnlocked created from json " + item);
-       }
+     if(json['poweredRooms'] != null){
+       poweredRooms = new List<String>.from(json ['poweredRooms']);
+
+       print("poweredRooms " + poweredRooms.toString());
      }
 
     for (var item in json['inventory']){

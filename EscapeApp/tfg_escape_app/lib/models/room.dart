@@ -54,7 +54,7 @@ class Room {
 
   @override
   String toString() {
-    return "${_formattedName}---------\n ${_elements}\n";
+    return "${_name}";
   }
 
 

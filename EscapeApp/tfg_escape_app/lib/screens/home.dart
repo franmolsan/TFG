@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:tfg_escape_app/models/diary_entry.dart';
+import 'package:tfg_escape_app/models/game_item.dart';
 import 'package:tfg_escape_app/models/game_state.dart';
 import 'package:tfg_escape_app/service/api.dart';
 
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
         .pushNamed("/single-entry", arguments: entry);
   }
 
-  // This function is triggered when the user tap on a diary entry
+  // This function is triggered when the user tap on a item entry
   void _goToItemScreen(context, item) {
     Navigator.of(context)
         .pushNamed("/item-screen", arguments: item);
@@ -67,6 +68,109 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  /// Find an element in a room
+  GameItem findElementInRoom(List<GameItem> roomElements,
+      String elementName) {
+    final element =
+    roomElements.firstWhere((el) => el.name == elementName);
+
+    return element;
+  }
+
+  // This function is used to build the item list for the room
+  // it uses a snapshot (so it must be used with a future builder)
+  ListView buildRoomItemList(snapshot){
+    var listView;
+
+    if (snapshot.data[currentGameState.currentRoomName].toString() == "sala 2" && !currentGameState.poweredRooms.contains("sala 2")){
+        listView = buildDarkRoomItemList(snapshot);
+    }
+    else {
+      listView = ListView.builder(
+          itemCount: snapshot.data[currentGameState.currentRoomName].elements.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+                child: Card(
+                  child: new InkWell(
+                    onTap: () =>_goToItemScreen(context, snapshot.data[currentGameState.currentRoomName].elements[index]),
+                    splashColor: Colors.blue.withAlpha(30),
+                    child: Container(
+                        padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                        child: Text('${snapshot.data[currentGameState.currentRoomName].elements[index].name}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                    ),
+                  ),
+                )
+            );
+          }
+      );
+    }
+    return listView;
+  }
+
+  ListView buildDarkRoomItemList(snapshot){
+    var onlyElement = findElementInRoom(snapshot.data[currentGameState.currentRoomName].elements,"Ranuras para las baterías");
+    var listView = ListView.builder(
+        itemCount: 1,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              child: Card(
+                child: new InkWell(
+                  onTap: () =>_goToItemScreen(context, onlyElement),
+                  splashColor: Colors.blue.withAlpha(30),
+                  child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                      child: Text('${onlyElement.name}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                  ),
+                ),
+              )
+          );
+        }
+    );
+
+    return listView;
+  }
+
+
+  // similar to the buildRoomItemList function
+  // but this one builds list from the inventory
+  ListView buildInventoryList(){
+    return ListView.builder(
+        itemCount: currentGameState.inventory.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              child: Card(
+                child: new InkWell(
+                  onTap: () =>_goToItemScreen(context, currentGameState.inventory[index]),
+                  splashColor: Colors.blue.withAlpha(30),
+                  child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                      child: Text('${currentGameState.inventory[index].name}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                  ),
+                ),
+              )
+          );
+        }
+    );
   }
 
   Future<void> startBarcodeScanStream() async {
@@ -209,29 +313,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         return Center(child: CircularProgressIndicator());
                       } else {
                         return Container(
-                             child: ListView.builder(
-                                 itemCount: snapshot.data[currentGameState.currentRoomName].elements.length,
-                                 itemBuilder: (BuildContext context, int index) {
-                                   return Container(
-                                      child: Card(
-                                       child: new InkWell(
-                                        onTap: () =>_goToItemScreen(context, snapshot.data[currentGameState.currentRoomName].elements[index]),
-                                         splashColor: Colors.blue.withAlpha(30),
-                                         child: Container(
-                                             padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
-                                             child: Text('${snapshot.data[currentGameState.currentRoomName].elements[index].name}',
-                                                 style: TextStyle(
-                                                     fontWeight: FontWeight.bold,
-                                                     color: Colors.black
-                                                 ),
-                                               textAlign: TextAlign.center,
-                                            )
-                                         ),
-                                       ),
-                                     )
-                                   );
-                                 }
-                             )
+                             child: buildRoomItemList(snapshot)
                         );
                       }
                     }
@@ -241,6 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
         )
     );
   }
+
   Widget InventaryScreen (BuildContext context) {
     return Container(
         alignment: Alignment.center,
@@ -263,32 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               child: Container(
-                   child: ListView.builder(
-                       itemCount: currentGameState.inventory.length,
-                       itemBuilder: (BuildContext context, int index) {
-                         return Container(
-                             child: Card(
-                               child: new InkWell(
-                                 onTap: () =>_goToItemScreen(context, currentGameState.inventory[index]),
-                                 splashColor: Colors.blue.withAlpha(30),
-                                 child: Container(
-                                     padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
-                                     child: Text('${currentGameState.inventory[index].name}',
-                                       style: TextStyle(
-                                           fontWeight: FontWeight.bold,
-                                           color: Colors.black
-                                       ),
-                                       textAlign: TextAlign.center,
-                                     )
-                                 ),
-                               ),
-                             )
-                         );
-                         return ListTile(
-                            title: Text('${currentGameState.inventory[index].name}'));
-
-                     }
-                  ),
+                   child: buildInventoryList()
               )
             )
           ],
